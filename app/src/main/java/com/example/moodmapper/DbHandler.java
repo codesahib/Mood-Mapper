@@ -22,7 +22,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create = "CREATE TABLE " + TABLE_NAME + " ( " + COLUMN_DATE + " TEXT, " + COLUMN_BORED + " INTEGER, " + COLUMN_LETHARGIC + " INTEGER, " + COLUMN_PRODUCTIVE + " INTEGER)";
+        String create = "CREATE TABLE " + TABLE_NAME + " ( " + COLUMN_DATE + " TEXT PRIMARY KEY, " + COLUMN_BORED + " INTEGER, " + COLUMN_LETHARGIC + " INTEGER, " + COLUMN_PRODUCTIVE + " INTEGER)";
         db.execSQL(create);
     }
 
@@ -45,7 +45,7 @@ public class DbHandler extends SQLiteOpenHelper {
         Log.d("mytag insert",Long.toString(insert));
         db.close();
 
-        return insert == -1 ? false : true;
+        return insert != -1;
     }
 
     public Cursor getRecord(String this_date){

@@ -29,10 +29,13 @@ public class HomeFragment extends Fragment {
     Button bLethargic;
     Button bProductive;
     Button deleteTable;
+    Button populateTable;
     TextView tvTodayDate;
     TextView result;
 
     Cursor current_record;
+    boolean record_exists;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -46,25 +49,28 @@ public class HomeFragment extends Fragment {
 //        });
         SimpleDateFormat dateToday = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = dateToday.format(new Date());
-
         bBored = root.findViewById(R.id.buttonBored);
         bLethargic = root.findViewById(R.id.buttonLethargic);
         bProductive = root.findViewById(R.id.buttonProductive);
         deleteTable = root.findViewById(R.id.deleteTable);
+        populateTable = root.findViewById(R.id.populateTable);
 
         tvTodayDate = root.findViewById(R.id.todayDate);
         result = root.findViewById(R.id.result);
 
         tvTodayDate.setText("Date: " + currentDate);
 
+        DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
+        current_record = handler.getRecord(currentDate);
+         if(current_record != null && current_record.moveToFirst()){
+            result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
+        }
 
         bBored.setOnClickListener(new View.OnClickListener() {
-            DbHandler handler;
             @Override
             public void onClick(View v){
                 Toast.makeText(getContext(), "Sad to hear you're bored!", Toast.LENGTH_SHORT).show();
 
-                handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
                 current_record = handler.getRecord(currentDate);
                 if(current_record == null){
                     boolean success = handler.addRecord(new Record(currentDate,1,0,0));
@@ -81,17 +87,14 @@ public class HomeFragment extends Fragment {
                 Log.d("debug","Reached here");
                 current_record = handler.getRecord(currentDate);
                 result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
-
             }
         });
 
         bProductive.setOnClickListener(new View.OnClickListener() {
-            DbHandler handler;
             @Override
             public void onClick(View v){
                 Toast.makeText(getContext(), "Glad to hear that!", Toast.LENGTH_SHORT).show();
 
-                handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
                 current_record = handler.getRecord(currentDate);
                 if(current_record == null){
                     boolean success = handler.addRecord(new Record(currentDate,0,0,1));
@@ -113,12 +116,10 @@ public class HomeFragment extends Fragment {
         });
 
         bLethargic.setOnClickListener(new View.OnClickListener() {
-            DbHandler handler;
             @Override
             public void onClick(View v){
                 Toast.makeText(getContext(), "Try to start!", Toast.LENGTH_SHORT).show();
 
-                handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
                 current_record = handler.getRecord(currentDate);
                 if(current_record == null){
                     boolean success = handler.addRecord(new Record(currentDate,0,1,0));
@@ -145,6 +146,19 @@ public class HomeFragment extends Fragment {
                 handler.removeTable();
                 handler.close();
                 result.setText("");
+            }
+        });
+
+        populateTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
+
+                handler.addRecord(new Record("2020-03-19",1,0,10));
+                handler.addRecord(new Record("2020-05-19",4,5,7));
+                handler.addRecord(new Record("2020-07-19",4,7,5));
+                handler.addRecord(new Record("2021-03-19",1,5,10));
+                handler.close();
             }
         });
         return root;
