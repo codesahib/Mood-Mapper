@@ -65,6 +65,23 @@ public class DbHandler extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getRecordBetweenRange(String from_date, String to_date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null ,
+                "date BETWEEN ? AND ?", new String[]{from_date,to_date} ,null,null,null);
+        if(cursor != null && cursor.moveToFirst()){
+            Log.d("mytag get", cursor.getString(0));
+            Log.d("mytag get", cursor.getString(1));
+            Log.d("mytag get", cursor.getString(2));
+            Log.d("mytag get", cursor.getString(3));
+            return cursor;
+        }
+        else{
+            Log.d("mytag get error","Error occured");
+            return null;
+        }
+    }
+
     public void updateRecord(String this_date, String mood, int mood_count){
         Log.d("update_record",this_date+" "+mood+" "+mood_count);
         SQLiteDatabase db = this.getWritableDatabase();
