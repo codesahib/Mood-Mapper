@@ -2,6 +2,8 @@ package com.example.moodmapper.ui.home;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import com.example.moodmapper.DbHandler;
 import com.example.moodmapper.R;
 import com.example.moodmapper.Record;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
@@ -30,8 +34,13 @@ public class HomeFragment extends Fragment {
     Button bProductive;
     Button deleteTable;
     Button populateTable;
+
+    TextView homeUsername;
     TextView tvTodayDate;
-    TextView result;
+
+    TextView resultBored;
+    TextView resultProductive;
+    TextView resultLethargic;
 
     Cursor current_record;
     boolean record_exists;
@@ -55,15 +64,26 @@ public class HomeFragment extends Fragment {
         deleteTable = root.findViewById(R.id.deleteTable);
         populateTable = root.findViewById(R.id.populateTable);
 
+        homeUsername=root.findViewById(R.id.homeUsername);
         tvTodayDate = root.findViewById(R.id.todayDate);
-        result = root.findViewById(R.id.result);
 
-        tvTodayDate.setText("Date: " + currentDate);
+        resultBored = root.findViewById(R.id.resultBored); resultBored.setText("0");
+        resultProductive = root.findViewById(R.id.resultProductive); resultProductive.setText("0");
+        resultLethargic = root.findViewById(R.id.resultLethargic); resultLethargic.setText("0");
+
+        tvTodayDate.setText(currentDate);
+
+        // Set Username
+        SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+        String UserName = preferences.getString("UserName","");
+        homeUsername.setText("Hi "+UserName+"!");
 
         DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
         current_record = handler.getRecord(currentDate);
          if(current_record != null && current_record.moveToFirst()){
-            result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
+            resultBored.setText(current_record.getString(1));
+            resultLethargic.setText(current_record.getString(2));
+            resultProductive.setText(current_record.getString(3));
         }
 
         bBored.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +106,9 @@ public class HomeFragment extends Fragment {
                 handler.close();
                 Log.d("debug","Reached here");
                 current_record = handler.getRecord(currentDate);
-                result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
+                resultBored.setText(current_record.getString(1));
+                resultLethargic.setText(current_record.getString(2));
+                resultProductive.setText(current_record.getString(3));
             }
         });
 
@@ -110,8 +132,9 @@ public class HomeFragment extends Fragment {
                 handler.close();
                 Log.d("debug","Reached here");
                 current_record = handler.getRecord(currentDate);
-                result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
-
+                resultBored.setText(current_record.getString(1));
+                resultLethargic.setText(current_record.getString(2));
+                resultProductive.setText(current_record.getString(3));
             }
         });
 
@@ -135,7 +158,9 @@ public class HomeFragment extends Fragment {
                 handler.close();
                 Log.d("debug","Reached here");
                 current_record = handler.getRecord(currentDate);
-                result.setText("B: "+ current_record.getString(1) + " L: "+current_record.getString(2)+ " P: " + current_record.getString(3));
+                resultBored.setText(current_record.getString(1));
+                resultLethargic.setText(current_record.getString(2));
+                resultProductive.setText(current_record.getString(3));
             }
         });
 
@@ -145,7 +170,9 @@ public class HomeFragment extends Fragment {
                 DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
                 handler.removeTable();
                 handler.close();
-                result.setText("");
+                resultBored.setText("0");
+                resultProductive.setText("0");
+                resultLethargic.setText("0");
             }
         });
 
