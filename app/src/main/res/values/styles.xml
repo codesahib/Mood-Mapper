@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Widget.Theme.MoodMapper.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.MoodMapper.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="home_title">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/theme_text_dark</item>
+<!--        <item name="android:fontFamily">Ariel</item>-->
+    </style>
+</resources>
