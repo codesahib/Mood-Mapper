@@ -10,31 +10,47 @@
         android:id="@+id/introTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:text="Hey There!"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="What should we call you?"
+        android:textAlignment="center"
+        android:textColor="@color/theme_dark"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
 
     <Button
         android:id="@+id/introButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="175dp"
+        android:layout_height="54dp"
+        android:background="@drawable/mood_buttons"
+        android:backgroundTint="@color/theme_dark"
+        android:fontFamily="@font/montserrat"
+        android:text="Proceed"
+        android:textColor="@color/theme_light"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introName" />
+        app:layout_constraintTop_toBottomOf="@+id/introName"
+        app:layout_constraintVertical_bias="0.497" />
 
     <EditText
         android:id="@+id/introName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:textSize="30sp"
         android:hint="Name"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

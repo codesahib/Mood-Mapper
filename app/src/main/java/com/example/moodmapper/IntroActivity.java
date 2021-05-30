@@ -23,15 +23,16 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         SharedPreferences preferences = getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+//        ******** Moved to Welcome Activity **********
 //        preferences.edit().remove("UserName").commit();
-        String UserName = preferences.getString("UserName","");
-        Log.d("intro",UserName);
-
-        if(UserName != ""){ // Username exists so start main activity directly
-            Intent intent = new Intent(IntroActivity.this,
-                    MainActivity.class);
-            startActivity(intent);
-        }
+//        String UserName = preferences.getString("UserName","");
+//        Log.d("intro",UserName);
+//
+//        if(UserName != ""){ // Username exists so start main activity directly
+//            Intent intent = new Intent(IntroActivity.this,
+//                    MainActivity.class);
+//            startActivity(intent);
+//        }
 
         introName = findViewById(R.id.introName);
         introButton = findViewById(R.id.introButton);
