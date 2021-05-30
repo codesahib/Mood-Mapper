@@ -15,3 +15,4 @@ Learnings:
 2. MVVM architecture.
 3. SQLite database connectivity.
 4. Activity and Fragments.
+5. Animations
