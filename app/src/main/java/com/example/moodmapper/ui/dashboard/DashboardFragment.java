@@ -137,7 +137,7 @@ public class DashboardFragment extends Fragment {
                         l += Integer.parseInt(search_record.getString(2));
                         p += Integer.parseInt(search_record.getString(3));
                     } while(search_record.moveToNext());
-                    viewResult.setText("B: "+ String.valueOf(b) + " L: "+ String.valueOf(l) + " P: " + String.valueOf(p));
+                    viewResult.setText("Bored: "+ String.valueOf(b) + " | Lethargic: "+ String.valueOf(l) + " | Productive: " + String.valueOf(p));
                 }
                 else{
                     viewResult.setText("Result not available");
