@@ -14,5 +14,6 @@ Learnings:
 1. Structure of an android app.
 2. MVVM architecture.
 3. SQLite database connectivity.
-4. Activity and Fragments.
-5. Animations
+4. Shared Preferences(in activity and fragment)
+5. Activity and Fragments.
+6. Animations
