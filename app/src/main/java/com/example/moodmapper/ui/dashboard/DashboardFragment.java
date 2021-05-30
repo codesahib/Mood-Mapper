@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
 
 public class DashboardFragment extends Fragment {
 
@@ -130,8 +133,6 @@ public class DashboardFragment extends Fragment {
                 int p=0;
 
                 if(search_record != null){
-
-
                     do{
                         b += Integer.parseInt(search_record.getString(1));
                         l += Integer.parseInt(search_record.getString(2));
@@ -159,29 +160,31 @@ public class DashboardFragment extends Fragment {
     private void setupPieChart(){
         pieChart.setDrawHoleEnabled(false); // Donut shape
         pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelTextSize(15); // Category text size
+        pieChart.setEntryLabelTextSize(12); // Category text size
         pieChart.setEntryLabelColor(Color.BLACK);
-//        pieChart.setCenterText("Spending");
+//        pieChart.setCenterText("Mood");
 //        pieChart.setCenterTextSize(24);
     }
 
     private void loadPieChartData(ArrayList<PieEntry> entries){
         ArrayList<Integer> colors = new ArrayList<>();
-        for (int color: ColorTemplate.MATERIAL_COLORS) {
-            colors.add(color);
-        }
 
-        for (int color: ColorTemplate.VORDIPLOM_COLORS) {
-            colors.add(color);
-        }
+        // The below lines help to add colors in default groups present in ColorTemplate Class
+//        for (int color: ColorTemplate.MATERIAL_COLORS) {
+//            colors.add(color);
+//        }
+//
+          colors.add(rgb("#e08181"));
+          colors.add(rgb("#84D4A4"));
+          colors.add(rgb("#808080"));
 
-        PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
+        PieDataSet dataSet = new PieDataSet(entries,"");
         dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
         data.setDrawValues(true);
         data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12); // Value for each category text size
+        data.setValueTextSize(10); // Value for each category text size
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);
