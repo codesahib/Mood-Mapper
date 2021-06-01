@@ -9,7 +9,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">What should we call you?</string>
 
-    <string name="home_title">What are you feeling today?</string>
-    <string name="dashboard_title">You can generate a pie chart for result by entering a date range.</string>
+    <string name="home_title">What are you feeling right now?</string>
+    <string name="dashboard_title">You can generate a pie chart for mood summary by entering a date range.</string>
     <string name="date_format">YYYY-MM-DD</string>
 </resources>
