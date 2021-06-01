@@ -1,181 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme_light"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/homeUsername"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi User"
-        android:textSize="40sp"
-        android:textColor="@color/theme_dark"
-        app:layout_constraintBottom_toTopOf="@+id/homeTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
+        android:background="@color/theme_light"
+        tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/homeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp"
-        android:gravity="center_horizontal|top"
-        android:text="@string/home_title"
-        android:fontFamily="@font/rambla"
-        android:textAppearance="@style/home_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/homeUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi User"
+            android:textColor="@color/theme_dark"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029" />
 
-    <Button
-        android:id="@+id/buttonBored"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:text="Bored"
-        android:backgroundTint="#E08181"
-        android:textColor="@color/theme_light"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonProductive"
-        app:layout_constraintEnd_toStartOf="@+id/homeButtonContainerLine"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        android:background="@drawable/mood_buttons"/>
+        <TextView
+            android:id="@+id/homeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rambla"
+            android:gravity="center_horizontal|top"
+            android:text="@string/home_title"
+            android:textAppearance="@style/home_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.148" />
 
-    <Button
-        android:id="@+id/buttonProductive"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mood_buttons"
-        android:backgroundTint="#84D4A4"
-        android:textColor="@color/theme_light"
-        android:textSize="20dp"
-        android:text="Productive"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toStartOf="@+id/homeButtonContainerLine"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3" />
+        <TextView
+            android:id="@+id/todayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:text="Date"
+            android:textColor="@color/theme_accent"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.333" />
 
-    <Button
-        android:id="@+id/buttonLethargic"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/grey"
-        android:background="@drawable/mood_buttons"
-        android:textColor="@color/theme_light"
-        android:textSize="20dp"
-        android:text="Lethargic"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toStartOf="@+id/homeButtonContainerLine"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toBottomOf="@+id/buttonProductive" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="343dp"
+            android:layout_height="288dp"
+            android:layout_marginTop="232dp"
+            android:background="@drawable/rounded_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/todayDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/theme_accent"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeTitle" />
+            <Button
+                android:id="@+id/buttonBored"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mood_buttons"
+                android:backgroundTint="#E08181"
+                android:text="Bored"
+                android:textColor="@color/theme_light"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15" />
 
-    <View
-        android:id="@+id/homeButtonContainerLine"
-        android:layout_width="11dp"
-        android:layout_height="280dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/home_buttons_container_line"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.629"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        app:layout_constraintVertical_bias="0.0" />
+            <Button
+                android:id="@+id/buttonProductive"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mood_buttons"
+                android:backgroundTint="#84D4A4"
+                android:text="Productive"
+                android:textColor="@color/theme_light"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="286dp"
-        android:layout_height="266dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rounded_rectangle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
-        app:layout_constraintVertical_bias="0.445" />
+            <Button
+                android:id="@+id/buttonLethargic"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mood_buttons"
+                android:backgroundTint="@color/grey"
+                android:text="Lethargic"
+                android:textColor="@color/theme_light"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
 
-    <TextView
-        android:id="@+id/resultBored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/theme_light"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/homeButtonContainerLine"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        app:layout_constraintVertical_bias="0.168" />
+            <TextView
+                android:id="@+id/resultBored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_light"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.79"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.145" />
 
-    <TextView
-        android:id="@+id/resultProductive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/theme_light"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintStart_toEndOf="@+id/homeButtonContainerLine"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3" />
+            <TextView
+                android:id="@+id/resultProductive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_light"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.793"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.483" />
 
-    <TextView
-        android:id="@+id/resultLethargic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/theme_light"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/homeButtonContainerLine"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        app:layout_constraintVertical_bias="0.862" />
+            <TextView
+                android:id="@+id/resultLethargic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_light"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.795"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.83" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/deleteTable"
-        android:layout_width="49dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="4dp"
-        android:text="D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
-        app:layout_constraintStart_toEndOf="@+id/homeUsername"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/mood_buttons"/>
+        <Button
+            android:id="@+id/deleteTable"
+            android:layout_width="49dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="4dp"
+            android:text="D"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.826"
+            app:layout_constraintStart_toEndOf="@+id/homeUsername"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/populateTable"
-        android:layout_width="54dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:text="P"
-        app:layout_constraintEnd_toStartOf="@+id/homeUsername"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/populateTable"
+            android:layout_width="54dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:text="P"
+            app:layout_constraintEnd_toStartOf="@+id/homeUsername"
+            app:layout_constraintHorizontal_bias="0.183"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
