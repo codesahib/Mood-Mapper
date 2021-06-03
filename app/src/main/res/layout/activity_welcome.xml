@@ -23,11 +23,13 @@
         android:text="MOOD MAPPER"
         android:textColor="@color/theme_dark"
         android:fontFamily="@font/montserrat"
-        android:textSize="50sp"
+        android:textSize="50dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal" />
     <View
         android:id="@+id/welcomeRectangleDown"
         android:layout_width="match_parent"
