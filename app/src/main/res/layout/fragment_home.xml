@@ -45,7 +45,7 @@
             android:id="@+id/todayDate"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_marginTop="184dp"
+            android:layout_marginTop="200dp"
             android:text="Date"
             android:textColor="@color/theme_accent"
             android:textSize="20sp"
@@ -53,102 +53,248 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="343dp"
+            android:layout_width="370dp"
             android:layout_height="288dp"
-            android:layout_marginTop="232dp"
+            android:layout_marginTop="272dp"
             android:background="@drawable/rounded_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/buttonBored"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/labelBored"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
                 android:background="@drawable/mood_buttons"
                 android:backgroundTint="#E08181"
+                android:gravity="center_vertical"
                 android:text="Bored"
+                android:textAlignment="center"
                 android:textColor="@color/theme_light"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.15" />
 
-            <Button
-                android:id="@+id/buttonProductive"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mood_buttons"
-                android:backgroundTint="#84D4A4"
-                android:text="Productive"
-                android:textColor="@color/theme_light"
-                android:textSize="20dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/groupBored"
+                android:layout_width="180dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rectangle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.10">
+
+                <TextView
+                    android:id="@+id/resultBored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Button
+                    android:id="@+id/buttonBoredPlus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#84D4A4"
+                    android:includeFontPadding="false"
+                    android:text="+"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Button
+                    android:id="@+id/buttonBoredMinus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#E08181"
+                    android:includeFontPadding="false"
+                    android:text="-"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/labelProductive"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:background="@drawable/mood_buttons"
+                android:backgroundTint="#84D4A4"
+                android:gravity="center_vertical"
+                android:text="Productive"
+                android:textAlignment="center"
+                android:textColor="@color/theme_light"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
-            <Button
-                android:id="@+id/buttonLethargic"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mood_buttons"
-                android:backgroundTint="@color/grey"
-                android:text="Lethargic"
-                android:textColor="@color/theme_light"
-                android:textSize="20dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/groupProductive"
+                android:layout_width="180dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rectangle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/resultProductive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Button
+                    android:id="@+id/buttonProductivePlus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#84D4A4"
+                    android:includeFontPadding="false"
+                    android:text="+"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Button
+                    android:id="@+id/buttonProductiveMinus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#E08181"
+                    android:includeFontPadding="false"
+                    android:text="-"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/labelLethargic"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:background="@drawable/mood_buttons"
+                android:backgroundTint="@color/grey"
+                android:gravity="center_vertical"
+                android:text="Lethargic"
+                android:textAlignment="center"
+                android:textColor="@color/theme_light"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.85" />
 
-            <TextView
-                android:id="@+id/resultBored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/theme_light"
-                android:textSize="30sp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/groupLethargic"
+                android:layout_width="180dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rectangle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.79"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.145" />
+                app:layout_constraintVertical_bias="0.90">
 
-            <TextView
-                android:id="@+id/resultProductive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/theme_light"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.793"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.483" />
+                <TextView
+                    android:id="@+id/resultLethargic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
-            <TextView
-                android:id="@+id/resultLethargic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/theme_light"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.795"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.83" />
+                <Button
+                    android:id="@+id/buttonLethargicPlus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#84D4A4"
+                    android:includeFontPadding="false"
+                    android:text="+"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Button
+                    android:id="@+id/buttonLethargicMinus"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#E08181"
+                    android:includeFontPadding="false"
+                    android:text="-"
+                    android:textColor="@color/theme_light"
+                    android:textSize="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
