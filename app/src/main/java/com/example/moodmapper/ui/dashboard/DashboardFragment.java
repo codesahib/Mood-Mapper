@@ -174,8 +174,8 @@ public class DashboardFragment extends Fragment {
 //            colors.add(color);
 //        }
 //
-          colors.add(rgb("#e08181"));
-          colors.add(rgb("#84D4A4"));
+          colors.add(rgb("#B69B56"));
+          colors.add(rgb("#2FB1AA"));
           colors.add(rgb("#808080"));
 
         PieDataSet dataSet = new PieDataSet(entries,"");

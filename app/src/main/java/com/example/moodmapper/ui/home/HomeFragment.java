@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
     Cursor current_record;
     String this_mood;
 
-    DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
+    DbHandler handler;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment {
         homeUsername.setText("Hi "+UserName+"!");
         /* ------------ */
 
+        handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
         current_record = handler.getRecord(currentDate);
 
          if(current_record != null && current_record.moveToFirst()){
