@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
         ListView settingsList = (ListView) root.findViewById(R.id.settingsList);
-        String[] Settings = {"Change Display Name","Developer Contact"};
+        String[] Settings = {"Change Display Name","Change Age","Developer Contact"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity() , R.layout.settings_list_item, R.id.list_item ,Settings);
         settingsList.setAdapter(adapter);
 
@@ -59,6 +59,33 @@ public class SettingsFragment extends Fragment {
                             SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
                             SharedPreferences.Editor edit = preferences.edit();
                             edit.putString("UserName",newUserName);
+                            edit.commit();
+                        }
+                    });
+
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                }
+
+                if(entry == "Change Age"){
+                    builder.setTitle("Change Age").setMessage("Please enter age");
+                    View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.settings_change_age, (ViewGroup) getView(), false);
+                    final EditText input = (EditText) viewInflated.findViewById(R.id.settingsNewAge);
+                    builder.setView(viewInflated);
+
+                    builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            String newUserName = input.getText().toString();
+
+                            SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+                            SharedPreferences.Editor edit = preferences.edit();
+                            edit.putString("Age",newUserName);
                             edit.commit();
                         }
                     });

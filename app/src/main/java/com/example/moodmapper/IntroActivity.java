@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 
 public class IntroActivity extends AppCompatActivity {
     Button introButton;
-    EditText introName;
+    EditText introName, introAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,14 @@ public class IntroActivity extends AppCompatActivity {
 //        }
 
         introName = findViewById(R.id.introName);
+        introAge = findViewById(R.id.introAge);
         introButton = findViewById(R.id.introButton);
         introButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("UserName",introName.getText().toString());
+                editor.putString("Age",introAge.getText().toString());
                 editor.apply();
 
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
