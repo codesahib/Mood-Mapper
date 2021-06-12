@@ -12,4 +12,7 @@
     <string name="home_title">What are you feeling right now?</string>
     <string name="dashboard_title">You can generate a pie chart for mood summary by entering a date range.</string>
     <string name="date_format">YYYY-MM-DD</string>
+    <string name="db_name">moodmapper.db</string>
+    <string name="date_parse_format">yyyy-MM-dd</string>
+    <string name="preference_name">PREFERENCE</string>
 </resources>

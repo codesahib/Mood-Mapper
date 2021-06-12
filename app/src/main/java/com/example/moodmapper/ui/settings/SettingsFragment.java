@@ -56,7 +56,7 @@ public class SettingsFragment extends Fragment {
                             dialog.dismiss();
                             String newUserName = input.getText().toString();
 
-                            SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+                            SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_name),MODE_PRIVATE);
                             SharedPreferences.Editor edit = preferences.edit();
                             edit.putString("UserName",newUserName);
                             edit.commit();
@@ -83,7 +83,7 @@ public class SettingsFragment extends Fragment {
                             dialog.dismiss();
                             String newUserName = input.getText().toString();
 
-                            SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+                            SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_name),MODE_PRIVATE);
                             SharedPreferences.Editor edit = preferences.edit();
                             edit.putString("Age",newUserName);
                             edit.commit();

@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
 ////                textView.setText(s);
 ////            }
 //        });
-        SimpleDateFormat dateToday = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateToday = new SimpleDateFormat(getString(R.string.date_parse_format));
         String currentDate = dateToday.format(new Date());
         bBoredPlus = root.findViewById(R.id.buttonBoredPlus); bBoredMinus = root.findViewById(R.id.buttonBoredMinus);
         bLethargicPlus = root.findViewById(R.id.buttonLethargicPlus); bLethargicMinus = root.findViewById(R.id.buttonLethargicMinus);
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
         tvTodayDate.setText(currentDate);
 
         /* Set Username */
-        SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE",MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_name),MODE_PRIVATE);
         String UserName = preferences.getString("UserName","");
         homeUsername.setText("Hi "+UserName+"!");
         /* ------------ */
