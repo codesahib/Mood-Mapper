@@ -39,20 +39,17 @@ public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
 
-    Button goButton;
-    Button todayButton;
-    Button weekButton;
-    Button monthButton;
-    Button yearButton;
+    Button goButton, todayButton, weekButton, monthButton, yearButton;
     TextView viewResult;
-    EditText fromDate;
-    EditText toDate;
+    EditText fromDate, toDate;
     PieChart pieChart;
+
+    DbHandler handler;
+    Cursor search_record;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 //        final TextView textView = root.findViewById(R.id.text_dashboard);
 //        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -61,7 +58,7 @@ public class DashboardFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_parse_format));
         Date date = new Date();
         String todayDate = dateFormat.format(date);
 
@@ -77,8 +74,21 @@ public class DashboardFragment extends Fragment {
 
         pieChart = root.findViewById(R.id.pieChart);
 
-        toDate.setText(todayDate);
+        /* Initialize the fragment when started */
+        handler = new DbHandler(getContext(),getString(R.string.db_name), null, 1);
+
+        toDate.setText(todayDate); dashboardViewModel.setTo_date(todayDate);
         Calendar c = Calendar.getInstance();
+
+        viewResult.setText(dashboardViewModel.getResult());
+
+        setupPieChart();
+        if(dashboardViewModel.getFrom_date() != ""){ // There is already a date range present
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            entries = dashboardViewModel.getPieChartEntries();
+            loadPieChartData(entries);
+        }
+        /* ------------------------------------ */
 
         todayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +96,7 @@ public class DashboardFragment extends Fragment {
                 fromDate.setText(todayDate);
             }
         });
+
         weekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,38 +136,42 @@ public class DashboardFragment extends Fragment {
                 String search_from_date = fromDate.getText().toString();
                 String search_to_date = toDate.getText().toString();
 
-                DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
-                Cursor search_record = handler.getRecordBetweenRange(search_from_date,search_to_date);
+                dashboardViewModel.setFrom_date(search_from_date);
+                dashboardViewModel.setTo_date(search_to_date);
+
+                search_record = handler.getRecordBetweenRange(dashboardViewModel.getFrom_date(),dashboardViewModel.getTo_date());
 
                 int b=0;
                 int l=0;
                 int p=0;
-
+                String result;
                 if(search_record != null){
                     do{
                         b += Integer.parseInt(search_record.getString(1));
                         l += Integer.parseInt(search_record.getString(2));
                         p += Integer.parseInt(search_record.getString(3));
                     } while(search_record.moveToNext());
-                    viewResult.setText("Bored: "+ String.valueOf(b) + " | Lethargic: "+ String.valueOf(l) + " | Productive: " + String.valueOf(p));
+                    result = "Bored: "+ String.valueOf(b) + " | Lethargic: "+ String.valueOf(l) + " | Productive: " + String.valueOf(p);
                 }
                 else{
-                    viewResult.setText("Result not available");
+                    result = "Result not available";
                 }
                 handler.close();
+
+                viewResult.setText(result);
+                dashboardViewModel.setResult(result);
 
                 ArrayList<PieEntry> entries = new ArrayList<>();
                 entries.add(new PieEntry(b,"Bored"));
                 entries.add(new PieEntry(p,"Productive"));
                 entries.add(new PieEntry(l,"Lethargic"));
-
-                setupPieChart();
+                dashboardViewModel.setPieChartEntries(entries);
                 loadPieChartData(entries);
             }
         });
-
         return root;
     }
+
     private void setupPieChart(){
         pieChart.setDrawHoleEnabled(false); // Donut shape
         pieChart.setUsePercentValues(true);
@@ -167,17 +182,13 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadPieChartData(ArrayList<PieEntry> entries){
-        ArrayList<Integer> colors = new ArrayList<>();
+        ArrayList<Integer> colors = dashboardViewModel.getPieChartColors();
 
         // The below lines help to add colors in default groups present in ColorTemplate Class
 //        for (int color: ColorTemplate.MATERIAL_COLORS) {
 //            colors.add(color);
 //        }
 //
-          colors.add(rgb("#B69B56"));
-          colors.add(rgb("#2FB1AA"));
-          colors.add(rgb("#808080"));
-
         PieDataSet dataSet = new PieDataSet(entries,"");
         dataSet.setColors(colors);
 
