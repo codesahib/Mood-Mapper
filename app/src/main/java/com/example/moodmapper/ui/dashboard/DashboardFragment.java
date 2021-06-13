@@ -3,8 +3,7 @@ package com.example.moodmapper.ui.dashboard;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moodmapper.DbHandler;
@@ -26,14 +23,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+import java.util.Locale;
 
 public class DashboardFragment extends Fragment {
 
@@ -52,7 +47,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_parse_format));
+        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_parse_format), Locale.getDefault());
         Date date = new Date();
         String todayDate = dateFormat.format(date);
 
@@ -77,91 +72,74 @@ public class DashboardFragment extends Fragment {
         viewResult.setText(dashboardViewModel.getResult());
 
         setupPieChart();
-        if(dashboardViewModel.getFrom_date() != ""){ // There is already a date range present
-            ArrayList<PieEntry> entries = new ArrayList<>();
+        if(!dashboardViewModel.getFrom_date().equals("")){ // There is already a date range present
+            ArrayList<PieEntry> entries;
             entries = dashboardViewModel.getPieChartEntries();
             loadPieChartData(entries);
         }
         /* ------------------------------------ */
 
-        todayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fromDate.setText(todayDate);
-            }
+        todayButton.setOnClickListener(v -> fromDate.setText(todayDate));
+
+        weekButton.setOnClickListener(v -> {
+            c.setTime(date);
+            c.add(Calendar.DATE,-7);
+
+            Date new_date = c.getTime();
+            fromDate.setText(dateFormat.format(new_date));
         });
 
-        weekButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                c.setTime(date);
-                c.add(Calendar.DATE,-7);
+        monthButton.setOnClickListener(v -> {
+            c.setTime(date);
+            c.add(Calendar.MONTH,-1);
 
-                Date new_date = c.getTime();
-                fromDate.setText(String.valueOf(dateFormat.format(new_date)));
-            }
+            Date new_date = c.getTime();
+            fromDate.setText(dateFormat.format(new_date));
         });
 
-        monthButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                c.setTime(date);
-                c.add(Calendar.MONTH,-1);
+        yearButton.setOnClickListener(v -> {
+            c.setTime(date);
+            c.add(Calendar.YEAR,-1);
 
-                Date new_date = c.getTime();
-                fromDate.setText(String.valueOf(dateFormat.format(new_date)));
-            }
+            Date new_date = c.getTime();
+            fromDate.setText(dateFormat.format(new_date));
         });
 
-        yearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                c.setTime(date);
-                c.add(Calendar.YEAR,-1);
+        goButton.setOnClickListener(v -> {
+            String search_from_date = fromDate.getText().toString();
+            String search_to_date = toDate.getText().toString();
 
-                Date new_date = c.getTime();
-                fromDate.setText(String.valueOf(dateFormat.format(new_date)));
+            dashboardViewModel.setFrom_date(search_from_date);
+            dashboardViewModel.setTo_date(search_to_date);
+
+            search_record = handler.getRecordBetweenRange(dashboardViewModel.getFrom_date(),dashboardViewModel.getTo_date());
+
+            int b=0;
+            int l=0;
+            int p=0;
+            String result;
+            if(search_record != null){
+                do{
+                    b += Integer.parseInt(search_record.getString(1));
+                    l += Integer.parseInt(search_record.getString(2));
+                    p += Integer.parseInt(search_record.getString(3));
+                } while(search_record.moveToNext());
+                result = "Bored: "+ b + " | Lethargic: "+ l + " | Productive: " + p;
             }
-        });
-
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String search_from_date = fromDate.getText().toString();
-                String search_to_date = toDate.getText().toString();
-
-                dashboardViewModel.setFrom_date(search_from_date);
-                dashboardViewModel.setTo_date(search_to_date);
-
-                search_record = handler.getRecordBetweenRange(dashboardViewModel.getFrom_date(),dashboardViewModel.getTo_date());
-
-                int b=0;
-                int l=0;
-                int p=0;
-                String result;
-                if(search_record != null){
-                    do{
-                        b += Integer.parseInt(search_record.getString(1));
-                        l += Integer.parseInt(search_record.getString(2));
-                        p += Integer.parseInt(search_record.getString(3));
-                    } while(search_record.moveToNext());
-                    result = "Bored: "+ String.valueOf(b) + " | Lethargic: "+ String.valueOf(l) + " | Productive: " + String.valueOf(p);
-                }
-                else{
-                    result = "Result not available";
-                }
-                handler.close();
-
-                viewResult.setText(result);
-                dashboardViewModel.setResult(result);
-
-                ArrayList<PieEntry> entries = new ArrayList<>();
-                entries.add(new PieEntry(b,"Bored"));
-                entries.add(new PieEntry(p,"Productive"));
-                entries.add(new PieEntry(l,"Lethargic"));
-                dashboardViewModel.setPieChartEntries(entries);
-                loadPieChartData(entries);
+            else{
+                result = "Result not available";
             }
+            handler.close();
+
+            viewResult.setText(result);
+            dashboardViewModel.setResult(result);
+
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            entries.add(new PieEntry(b,"Bored"));
+            entries.add(new PieEntry(p,"Productive"));
+            entries.add(new PieEntry(l,"Lethargic"));
+            dashboardViewModel.setPieChartEntries(entries);
+            loadPieChartData(entries);
         });
         return root;
     }
