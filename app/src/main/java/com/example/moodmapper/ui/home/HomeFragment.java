@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.moodmapper.DbHandler;
 import com.example.moodmapper.R;
@@ -21,12 +20,13 @@ import com.example.moodmapper.Record;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+//    private HomeViewModel homeViewModel;
     Button bBoredPlus, bBoredMinus;
     Button bLethargicPlus, bLethargicMinus;
     Button bProductivePlus, bProductiveMinus;
@@ -47,16 +47,17 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 //        final TextView textView = root.findViewById(R.id.text_home);
+//        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 ////            @Override
 ////            public void onChanged(@Nullable String s) {
 ////                textView.setText(s);
 ////            }
 //        });
-        SimpleDateFormat dateToday = new SimpleDateFormat(getString(R.string.date_parse_format));
+        SimpleDateFormat dateToday = new SimpleDateFormat(getString(R.string.date_parse_format), Locale.getDefault());
         String currentDate = dateToday.format(new Date());
         bBoredPlus = root.findViewById(R.id.buttonBoredPlus); bBoredMinus = root.findViewById(R.id.buttonBoredMinus);
         bLethargicPlus = root.findViewById(R.id.buttonLethargicPlus); bLethargicMinus = root.findViewById(R.id.buttonLethargicMinus);
@@ -74,7 +75,7 @@ public class HomeFragment extends Fragment {
         tvTodayDate.setText(currentDate);
 
         /* Set Username */
-        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_name),MODE_PRIVATE);
+        SharedPreferences preferences = requireActivity().getSharedPreferences(getString(R.string.preference_name),MODE_PRIVATE);
         String UserName = preferences.getString("UserName","");
         homeUsername.setText("Hi "+UserName+"!");
         /* ------------ */
@@ -86,147 +87,117 @@ public class HomeFragment extends Fragment {
             updateRecordOnUI(current_record);
         }
 
-        bBoredPlus.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 this_mood = "bored";
-                 Toast.makeText(getContext(), "Sad to hear you're bored!", Toast.LENGTH_SHORT).show();
+        bBoredPlus.setOnClickListener(v -> {
+            this_mood = "bored";
+            Toast.makeText(getContext(), "Sad to hear you're bored!", Toast.LENGTH_SHORT).show();
 
-                 current_record = handler.getRecord(currentDate);
-                 if(current_record == null){
-                     boolean success = handler.addRecord(new Record(currentDate,1,0,0));
+            current_record = handler.getRecord(currentDate);
+            if(current_record == null){
+                boolean success = handler.addRecord(new Record(currentDate,1,0,0));
 //                     if(success){
 //                         Log.d("mytag", "Record added for bored");
 //                     }
-                 }
-                 else{
-                     int mood_value = Integer.parseInt(current_record.getString(1));
-                     incrementMood(this_mood, mood_value,currentDate);
-                 }
-                 Log.d("debug","Reached here");
-                 current_record = handler.getRecord(currentDate);
-                 updateRecordOnUI(current_record);
-             }
-         });
-
-        bBoredMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                this_mood = "bored";
-
-                current_record = handler.getRecord(currentDate);
-                if(current_record != null){
-                    int mood_value = Integer.parseInt(current_record.getString(1));
-                    DecrementMood(this_mood, mood_value,currentDate);
-                }
-                Log.d("debug","Reached here");
-                current_record = handler.getRecord(currentDate);
-                updateRecordOnUI(current_record);
             }
+            else{
+                int mood_value = Integer.parseInt(current_record.getString(1));
+                incrementMood(this_mood, mood_value,currentDate);
+            }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
         });
 
-        bProductivePlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                this_mood = "productive";
-                Toast.makeText(getContext(), "Glad to hear that!", Toast.LENGTH_SHORT).show();
+        bBoredMinus.setOnClickListener(v -> {
+            this_mood = "bored";
 
-                current_record = handler.getRecord(currentDate);
-                if(current_record == null){
-                    boolean success = handler.addRecord(new Record(currentDate,0,0,1));
-//                     if(success){
-//                         Log.d("mytag", "Record added for bored");
-//                     }
-                }
-                else{
-                    int mood_value = Integer.parseInt(current_record.getString(3));
-                    incrementMood(this_mood, mood_value,currentDate);
-                }
-                Log.d("debug","Reached here");
-                current_record = handler.getRecord(currentDate);
-                updateRecordOnUI(current_record);
+            current_record = handler.getRecord(currentDate);
+            if(current_record != null){
+                int mood_value = Integer.parseInt(current_record.getString(1));
+                DecrementMood(this_mood, mood_value,currentDate);
             }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
         });
 
-        bProductiveMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                this_mood = "productive";
+        bProductivePlus.setOnClickListener(v -> {
+            this_mood = "productive";
+            Toast.makeText(getContext(), "Glad to hear that!", Toast.LENGTH_SHORT).show();
 
-                current_record = handler.getRecord(currentDate);
-                if(current_record != null){
-                    int mood_value = Integer.parseInt(current_record.getString(3));
-                    DecrementMood(this_mood, mood_value,currentDate);
-                }
-                Log.d("debug","Reached here");
-                current_record = handler.getRecord(currentDate);
-                updateRecordOnUI(current_record);
+            current_record = handler.getRecord(currentDate);
+            if(current_record == null){
+                handler.addRecord(new Record(currentDate,0,0,1));
             }
+            else{
+                int mood_value = Integer.parseInt(current_record.getString(3));
+                incrementMood(this_mood, mood_value,currentDate);
+            }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
         });
 
-        bLethargicPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                this_mood = "lethargic";
-                Toast.makeText(getContext(), "Try to Start", Toast.LENGTH_SHORT).show();
+        bProductiveMinus.setOnClickListener(v -> {
+            this_mood = "productive";
 
-                current_record = handler.getRecord(currentDate);
-                if(current_record == null){
-                    boolean success = handler.addRecord(new Record(currentDate,0,1,0));
-//                     if(success){
-//                         Log.d("mytag", "Record added for bored");
-//                     }
-                }
-                else{
-                    int mood_value = Integer.parseInt(current_record.getString(2));
-                    incrementMood(this_mood, mood_value,currentDate);
-                }
-                Log.d("debug","Reached here");
-                current_record = handler.getRecord(currentDate);
-                updateRecordOnUI(current_record);
+            current_record = handler.getRecord(currentDate);
+            if(current_record != null){
+                int mood_value = Integer.parseInt(current_record.getString(3));
+                DecrementMood(this_mood, mood_value,currentDate);
             }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
         });
 
-        bLethargicMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                this_mood = "lethargic";
+        bLethargicPlus.setOnClickListener(v -> {
+            this_mood = "lethargic";
+            Toast.makeText(getContext(), "Try to Start", Toast.LENGTH_SHORT).show();
 
-                current_record = handler.getRecord(currentDate);
-                if(current_record != null){
-                    int mood_value = Integer.parseInt(current_record.getString(2));
-                    DecrementMood(this_mood, mood_value,currentDate);
-                }
-                Log.d("debug","Reached here");
-                current_record = handler.getRecord(currentDate);
-                updateRecordOnUI(current_record);
+            current_record = handler.getRecord(currentDate);
+            if(current_record == null){
+                handler.addRecord(new Record(currentDate,0,1,0));
             }
+            else{
+                int mood_value = Integer.parseInt(current_record.getString(2));
+                incrementMood(this_mood, mood_value,currentDate);
+            }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
+        });
+
+        bLethargicMinus.setOnClickListener(v -> {
+            this_mood = "lethargic";
+
+            current_record = handler.getRecord(currentDate);
+            if(current_record != null){
+                int mood_value = Integer.parseInt(current_record.getString(2));
+                DecrementMood(this_mood, mood_value,currentDate);
+            }
+            Log.d("debug","Reached here");
+            current_record = handler.getRecord(currentDate);
+            updateRecordOnUI(current_record);
         });
 
 
-        deleteTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
-                handler.removeTable();
-                handler.close();
-                resultBored.setText("0");
-                resultProductive.setText("0");
-                resultLethargic.setText("0");
-            }
+        deleteTable.setOnClickListener(v -> {
+            DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
+            handler.removeTable();
+            handler.close();
+            resultBored.setText("0");
+            resultProductive.setText("0");
+            resultLethargic.setText("0");
         });
 
-        populateTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
+        populateTable.setOnClickListener(v -> {
+            DbHandler handler = new DbHandler(getContext(),"moodmapper.db", null, 1);
 
-                handler.addRecord(new Record("2020-03-19",1,0,10));
-                handler.addRecord(new Record("2020-05-19",4,5,7));
-                handler.addRecord(new Record("2020-07-19",4,7,5));
-                handler.addRecord(new Record("2021-03-19",1,5,10));
-                handler.close();
-            }
+            handler.addRecord(new Record("2020-03-19",1,0,10));
+            handler.addRecord(new Record("2020-05-19",4,5,7));
+            handler.addRecord(new Record("2020-07-19",4,7,5));
+            handler.addRecord(new Record("2021-03-19",1,5,10));
+            handler.close();
         });
 
         return root;
@@ -240,12 +211,7 @@ public class HomeFragment extends Fragment {
 
     public void DecrementMood(String mood, int mood_value, String this_date){
         Log.d("record found",String.valueOf(mood_value));
-        if(mood_value - 1 < 0){
-            handler.updateRecord(this_date, mood, 0);
-        }
-        else {
-            handler.updateRecord(this_date, mood, mood_value - 1);
-        }
+        handler.updateRecord(this_date, mood, Math.max(mood_value - 1, 0));
         handler.close();
     }
 
