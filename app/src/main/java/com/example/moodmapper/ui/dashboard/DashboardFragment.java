@@ -135,9 +135,9 @@ public class DashboardFragment extends Fragment {
             dashboardViewModel.setResult(result);
 
             ArrayList<PieEntry> entries = new ArrayList<>();
-            entries.add(new PieEntry(b,"Bored"));
-            entries.add(new PieEntry(p,"Productive"));
-            entries.add(new PieEntry(l,"Lethargic"));
+            if(b>0) entries.add(new PieEntry(b,"Bored"));
+            if(p>0) entries.add(new PieEntry(p,"Productive"));
+            if(l>0) entries.add(new PieEntry(l,"Lethargic"));
             dashboardViewModel.setPieChartEntries(entries);
             loadPieChartData(entries);
         });
@@ -171,6 +171,7 @@ public class DashboardFragment extends Fragment {
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);
+        pieChart.getDescription().setEnabled(false);
         pieChart.invalidate();
 
         pieChart.animateY(1000, Easing.EaseInOutQuad);
