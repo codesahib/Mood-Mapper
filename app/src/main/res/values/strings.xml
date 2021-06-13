@@ -3,11 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">What should we call you?</string>
+
+    <string name="intro_ask_name">What should we call you?</string>
 
     <string name="home_title">What are you feeling right now?</string>
     <string name="dashboard_title">You can generate a pie chart for mood summary by entering a date range.</string>
@@ -15,4 +12,14 @@
     <string name="db_name">moodmapper.db</string>
     <string name="date_parse_format">yyyy-MM-dd</string>
     <string name="preference_name">PREFERENCE</string>
+
+
+    <!-- Simple Headings -->
+    <string name="string_date">Date</string>
+    <string name="string_bored">Bored</string>
+    <string name="string_productive">Productive</string>
+    <string name="string_lethargic">Lethargic</string>
+    <string name="string_today">Today</string>
+    <string name="string_name">Name</string>
+    <string name="string_age">Age</string>
 </resources>
