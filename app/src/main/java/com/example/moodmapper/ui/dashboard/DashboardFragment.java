@@ -1,5 +1,6 @@
 package com.example.moodmapper.ui.dashboard;
 
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,6 +42,17 @@ public class DashboardFragment extends Fragment {
 
     DbHandler handler;
     Cursor search_record;
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Press the 'Go' button after selecting date range to generate/update Pie Chart");
+        builder.setPositiveButton("OK", (dialog, id) -> dialog.cancel());
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
