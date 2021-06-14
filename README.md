@@ -12,8 +12,12 @@ Aim:
 
 Learnings:
 1. Structure of an android app.
-2. MVVM architecture.
+2. MVVM architecture: ViewModels
 3. SQLite database connectivity.
 4. Shared Preferences(in activity and fragment)
 5. Activity and Fragments.
 6. Animations
+7. Working with charts using 3rd party lib.
+
+TODO:
+1. Shared ViewModels
