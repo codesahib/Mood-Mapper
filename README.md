@@ -1,16 +1,16 @@
 # Mood-Mapper
 First android project
 
-Problem Statement:
+**Problem Statement:**
 
 To track different moods of a user on daily/weekly/monthly/yearly basis. The user will just click on the mood at any time of the day and it will be stored in the database.
 The user can fetch the data of moods between 1 week, 1 month, 1 year interval. There's also a custom date range interval.
 
-Aim:
+**Aim:**
 1. To understand android app development
 2. Create a working protoype to compliment learning
 
-Learnings:
+**Learnings:**
 1. Structure of an android app.
 2. MVVM architecture: ViewModels
 3. Bottom Navigation Bar.
@@ -20,10 +20,10 @@ Learnings:
 7. Animations.
 8. Working with charts using 3rd party lib.
 
-TODO:
+**TODO:**
 1. Shared ViewModels
 
-Screenshots:
+**Screenshots:**
 
 <a href="url"><img src="Splash screen.jpeg" align="center" height="450" width="230" margin="10 5" ></a>
 <a href="url"><img src="Home.jpeg" align="center" height="450" width="230" margin="10 5"></a>
