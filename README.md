@@ -22,3 +22,11 @@ Learnings:
 
 TODO:
 1. Shared ViewModels
+
+Screenshots:
+
+<a href="url"><img src="Splash screen.jpeg" align="center" height="450" width="230" margin="10 5" ></a>
+<a href="url"><img src="Home.jpeg" align="center" height="450" width="230" margin="10 5"></a>
+<a href="url"><img src="Dashboard.jpeg" align="center" height="450" width="230" margin="10 5"></a>
+<a href="url"><img src="Settings.jpeg" align="center" height="450" width="230" margin="10 5"></a>
+<a href="url"><img src="Change Username.jpeg" align="center" height="450" width="230" margin="10 5"></a>
